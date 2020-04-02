@@ -1,8 +1,10 @@
 package com.amos.example;
 
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.amos.widget.DatePickDialog;
@@ -19,6 +21,45 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+
+        Log.e("","--------");
+        //隐藏虚拟按键，并且全屏
+        View gameView = getWindow().getDecorView();
+        if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // lower api
+            gameView.setSystemUiVisibility(View.GONE);
+        } else if (Build.VERSION.SDK_INT >= 19) {
+            //for new api versions.
+            int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;
+            gameView.setSystemUiVisibility(uiOptions);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Log.e("","--------");
+        //隐藏虚拟按键，并且全屏
+        View gameView = getWindow().getDecorView();
+        if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // lower api
+            gameView.setSystemUiVisibility(View.GONE);
+        } else if (Build.VERSION.SDK_INT >= 19) {
+            //for new api versions.
+            int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;
+            gameView.setSystemUiVisibility(uiOptions);
+        }
+
     }
 
     private void showDatePickDialog(DateType type) {
